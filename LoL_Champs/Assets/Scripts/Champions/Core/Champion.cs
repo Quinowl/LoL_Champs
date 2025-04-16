@@ -6,11 +6,11 @@ public abstract class Champion : MonoBehaviour
     [SerializeField] protected ChampionMovement _movement;
     [SerializeField] protected ChampionAutoAttack _autoAttack;
 
-    protected CooldownManager _cooldownManager;
+    protected ChampionCooldowns _cooldownManager;
 
     protected virtual void Awake()
     {
-        _cooldownManager = new CooldownManager();
+        _cooldownManager = new ChampionCooldowns();
     }
 
     protected virtual void Start()
