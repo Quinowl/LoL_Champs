@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class TF_Q : MonoBehaviour
+public class TF_Q : ChampionAbility
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public override KeyCode ActivationKey => KeyCode.Q;
 
-    // Update is called once per frame
-    void Update()
+    public override void Activate()
     {
-        
+        throw new System.NotImplementedException();
     }
 }
