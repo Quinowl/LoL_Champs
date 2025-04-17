@@ -1,16 +1,21 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChampionMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private NavMeshAgent _agent;
+
+    void Awake()
     {
-        
+        if (!_agent) _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveTo(Vector3 newPosition)
     {
-        
+        _agent.transform.forward = newPosition - _agent.transform.position;
+        _agent.SetDestination(newPosition);
     }
+    public void Stop() => _agent.ResetPath();
+    public bool IsMoving() => _agent.hasPath;
 }
