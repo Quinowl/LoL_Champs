@@ -4,19 +4,33 @@ using UnityEngine;
 public class ChampionAutoAttack : MonoBehaviour
 {
     [SerializeField] private int _damage;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private float _attackCooldown;
 
     private float _lastAttackTime;
-    private Transform _target;
+    private Damageable _target;
 
     public event Action<GameObject> OnHit;
 
-    public void SetTarget(Transform newTarget) => _target = newTarget;
+    public void SetTarget(Damageable newTarget) => _target = newTarget;
+
+    void Update()
+    {
+        if (_target == null) return;
+        if (Vector3.Distance(transform.position, _target.transform.position) <= _attackRange &&
+            Time.time - _lastAttackTime >= _attackCooldown)
+        {
+            Attack();
+            _lastAttackTime = Time.time;
+        }
+    }
 
     private void Attack()
     {
-        if (_target.TryGetComponent(out Damageable damageable))
+        if (_target != null)
         {
-            damageable.TakeDamage(_damage);
+            Debug.Log($"Atacamos a {_target.name}");
+            _target.TakeDamage(_damage);
             OnHit?.Invoke(_target.gameObject);
         }
     }

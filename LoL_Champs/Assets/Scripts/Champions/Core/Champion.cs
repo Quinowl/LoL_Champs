@@ -16,7 +16,7 @@ public abstract class Champion : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _cooldowns = new ChampionCooldowns();
+        // _cooldowns = new ChampionCooldowns();
         _input.Initialize(this);
     }
 

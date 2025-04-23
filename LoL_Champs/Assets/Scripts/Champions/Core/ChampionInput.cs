@@ -19,8 +19,12 @@ public class ChampionInput : MonoBehaviour
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            // GameObject clickedObj = hit.collider.gameObject;
-            _champion.Movement.MoveTo(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            if (hit.collider.TryGetComponent(out Damageable damageable)) _champion.AutoAttack.SetTarget(damageable);
+            else
+            {
+                _champion.AutoAttack.SetTarget(null);
+                _champion.Movement.MoveTo(new Vector3(hit.point.x, transform.position.y, hit.point.z));
+            }
         }
     }
 }
