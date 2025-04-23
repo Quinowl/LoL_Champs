@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "ScriptableObjects/ChampionStats/Twisted Fate")]
 public class TF_Stats : ChampionStats
 {
     [Header("Q ability - Wild Cards")]

@@ -16,7 +16,7 @@ public class ChampionAutoAttack : MonoBehaviour
 
     void Update()
     {
-        if (_target == null) return;
+        if (!_target) return;
         if (Vector3.Distance(transform.position, _target.transform.position) <= _attackRange &&
             Time.time - _lastAttackTime >= _attackCooldown)
         {
@@ -27,9 +27,9 @@ public class ChampionAutoAttack : MonoBehaviour
 
     private void Attack()
     {
-        if (_target != null)
+        if (_target)
         {
-            Debug.Log($"Atacamos a {_target.name}");
+            // Debug.Log($"Atacamos a {_target.name}");
             _target.TakeDamage(_damage);
             OnHit?.Invoke(_target.gameObject);
         }
