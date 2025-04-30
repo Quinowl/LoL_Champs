@@ -9,7 +9,11 @@ public class ChampionInput : MonoBehaviour
     {
         if (!_cam) _cam = Camera.main;
     }
-    void Update() => HandleClick();
+    void Update()
+    {
+        HandleClick();
+        HandleAbilitiesInputs();
+    }
 
     public void Initialize(Champion champion) => _champion = champion;
 
@@ -18,5 +22,13 @@ public class ChampionInput : MonoBehaviour
         if (!Input.GetMouseButtonDown(1)) return;
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit)) _champion.Mediator.OnClick(hit);
+    }
+
+    private void HandleAbilitiesInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Q)) Debug.Log("Q pressed");
+        if (Input.GetKeyDown(KeyCode.W)) Debug.Log("W pressed");
+        if (Input.GetKeyDown(KeyCode.E)) Debug.Log("E pressed");
+        if (Input.GetKeyDown(KeyCode.R)) Debug.Log("R pressed");
     }
 }
